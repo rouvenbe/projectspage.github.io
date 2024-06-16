@@ -57,8 +57,8 @@
 
         function loadInitialBlog() {
             const params = new URLSearchParams(window.location.search);
-            const blogId = params.has('') ? params.get('') : 'about-me';
-            loadBlog(blogId);
+            const blogId = params.toString(); // Get the query string as the blogId
+            loadBlog(blogId || 'about-me');
         }
 
         window.addEventListener('popstate', event => {
