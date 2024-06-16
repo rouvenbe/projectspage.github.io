@@ -4,14 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog 1</title>
+    <style>
+        .rotated-svg {
+            transform: rotate(90deg);
+            display: block;
+            margin: 2000px auto;
+        }
+    </style>
 </head>
 <body>
     <div class="blog">
-        <h2>Blog 1</h2>
-        <p class="date">2024-06-20</p>
-        <p class="keywords">example, blog, tutorial</p>
-        <img src="images/image1.jpg" alt="Blog 1 Image">
-        <p>This is the content of blog 11. This blog post is about various interesting topics that you will find insightful...</p>
+        <h1>Predicting Top 10 Chart Hits with Logistic Regression, Support Vecor Machine and Gradient Boosting Trees</h1>
+        <p class="date">2022-12-02</p>
+        <p class="keywords">#example #blog #tutorial</p>
+        <p>The analysis of the german charts and 347 variables shows that some of the variables have a significant influence on the chart success. Given the set of regressors, which is listed below, with logistic regression, Linear SVM and Gradient Boosting models, I calculate a songs probability of reaching a top 10 Chart Position. The best model is the Logit Model which can predict Hit-Songs with a balanced accuracy of 73%, which is clearly above that of random assignment (50%).
+        </p>
+        <h2>Data</h2>
+        <p>The basis of the analysis are the german weekly top 100 charts since 2012 published by GfK Entertainment on www.offiziellecharts.de. Using the APIs from Spotify , Genius and Wikipedia , I was able to obtain the 347 song specific variables.</p>
+        <h2>Variables</h2>
+        <p>Exogeneous: The peak chart position is a good measure of a song’s success. Since most songs are in the charts before and after the first chart peak with a lower position, all lower chart entries were removed. In this study, Hits are songs that reached a peak position in the top 10. Non-Hits are songs whose peak position is in the 70–100 range.
+           Endogeneous: The determinants of chart success can basically be divided into factors of a socioeconomic and musical nature. The former includes, for example, the initial popularity of the artist, the marketing budget, gender, or age. The set of musical factors can be divided into three subgroups: track & artist information, audio features & tonal characteristics from audio spectral analysis, and Lyric-related Variables.
+           <ol>
+            <li>The track & artist information includes variables such as track length, volume, or genres with which the artist can be associated.</li>
+            <li>The variables of the second category are audio features calculated by Spotify. They take values between 0 & 1 and describe specific “tangible” features of the song (like Danceability, Valence, Speechiness). The underlying calculation algorithm has not been published; however I think that the 12 Timbre Vectors play a major influence. To classify the timbre of a song, Spotify defined 12 function and patterns in the audio spectrogram. Each of these patterns represents a specific tonal character such as overall volume, brightness or attack. The audio spectrogram is a representation of pitch, volume and time. Because of the time dimension, the 12 timbre values must be calculated for each segment of a song. A segment contains a roughly consistent sound throughout its duration. To get the songs overall timbres, I extracted statistical moments (mean, standard deviation, minimum and maximum) of the 12 timbre vectors of all segments. Herremans et al. (2019) have also included these statistical moments of the timbres in their model and were able to achieve very good results.</li>
+            <li>The analysis of the song texts requires a prior vectorisation of the entire vocabulary of all song texts. Then, for each word, the number of times it occurs in each song text is counted (bag-of-words approach). This allows the models to identify words that occur more often in hit songs and thus have an impact on hit probability. To capture the context of whole sentences and lines, word groups of up to ten words were also included in the vocabulary. Another criterion is the frequency of the n-grams. To avoid overfitting, only n-grams that occur in a maximum of 250, and in at least three different songs, were included.</li>
+        </ol>
+        </p>
+        <h2>Models</h2>
+        <h3>Logistic regression</h3>
+        <p>Logistic regression can be seen as a type of OLS regression, where the predicted values are transformed using the logistic function to constrain them between 0 and 1. This transformation allows logistic regression to be used for classification problems, where the predicted values represent the probability of an event occurring. To estimate the coefficients, you can use maximum likelihood estimation, which involves finding the values of the coefficients that maximize the likelihood of the observed data.</p>
+        </p>
+        <h3>Linear support vector machine</h3>
+        <p>Linear support vector machines (SVMs) are estimated using the primal optimization problem, which involves finding the hyperplane in the feature space that maximally separates the two classes.</p>
+        <h3>Gradient boosting tree</h3>
+        <p>A GBRT works by training a sequence of decision tree models in a stage-wise fashion. In each stage, a new decision tree is trained to correct the errors made by the previous tree. The trees are trained using the gradient descent algorithm, which minimizes a loss function by iteratively updating the parameters of the model in the direction that reduces the error. The prediction of the final model is the weighted sum of the predictions of the individual trees.</p>
+        <h2>Experimental setup</h2>
+        <img class="rotated-svg" src="images/blog11.svg" alt="Description of SVG">
+        <p>Since the relevant features vary significantly from genre to genre, an Separate model for HipHop Tracks is appropriate. After the genre filter, the data are randomly split into training (80%) and test (20%) data sets. Each of the three models (Logit, SVM, GB) receives the same training and test set.
+            FS must be performed as a next step. I decided to use Lasso (L1) regularisation. This way, coefficients can be regularised down to zero, which reduces the set of variables to a few relevant ones. To choose the right regularisation parameter (“C”), I performed parameter tuning with cross validation on the test set. The best parameters were subsequently used for training the model.
+            The whole procedure was repeated 50 times in order to minimise the variance due to random training and test data splitting. Since the data sets are unbalanced, balanced accuracy was used as a selection criterion.
+            This research proves that popularity of songs can be predicted from the analysis of music signals, artist related socioeconomic variables ans Lyrics-analysis.
+        </p>
+        <img src="images/blog12.png">
     </div>
 </body>
 </html>

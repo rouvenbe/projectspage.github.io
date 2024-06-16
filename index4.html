@@ -10,16 +10,15 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to My Portfolio</h1>
+        <!-- Header content removed as per your changes -->
     </header>
     <main>
         <section class="blog-list-container" id="blog-list-container">
             <div class="blogs" id="blogs">
-                <div class="blog-preview" onclick="loadBlog('about-me')">
+                <div class="blog-preview" onclick="loadAboutMe()">
                     <h2>About Me</h2>
                     <p>A brief introduction about yourself...</p>
                 </div>
-                <!-- Blog previews will be loaded dynamically here -->
             </div>
         </section>
         <section class="blog-content-container">
@@ -27,53 +26,17 @@
         </section>
     </main>
     <footer>
+        <!-- Footer background color changed to white -->
         <p>&copy; 2024 My Portfolio</p>
     </footer>
     <script>
-        async function loadBlog(blogId) {
-            const blogContent = document.getElementById('blog-content');
-            let blogFile;
-            if (blogId === 'about-me') {
-                blogFile = 'about-me.html';
-            } else {
-                blogFile = `blogs/${blogId}.html`;
-            }
-
-            history.pushState({ blogId }, '', `/${blogId}`);
-
-            try {
-                const response = await fetch(blogFile);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                const text = await response.text();
-                blogContent.innerHTML = text;
-                MathJax.typeset(); // Process LaTeX in the content if needed
-            } catch (error) {
-                console.error('Error loading blog:', blogFile, error);
-                blogContent.innerHTML = '<p>Sorry, the content you are looking for cannot be found.</p>';
-            }
-        }
-
-        function loadInitialBlog() {
-            const params = new URLSearchParams(window.location.search);
-            const blogId = params.has('') ? params.get('') : 'about-me';
-            loadBlog(blogId);
-        }
-
-        window.addEventListener('popstate', event => {
-            if (event.state && event.state.blogId) {
-                loadBlog(event.state.blogId);
-            }
-        });
-
         async function loadBlogs() {
             const blogsContainer = document.getElementById('blogs');
-            const blogFiles = ['blog1', 'blog2', 'blog3', 'blog4', 'blog5', 'blog6'];
+            const blogFiles = ['blogs/blog1.html', 'blogs/blog2.html', 'blogs/blog3.html','blogs/blog4.html','blogs/blog5.html','blogs/blog6.html'];
 
             for (const blogFile of blogFiles) {
                 try {
-                    const response = await fetch(`blogs/${blogFile}.html`);
+                    const response = await fetch(blogFile);
                     const text = await response.text();
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(text, 'text/html');
@@ -82,7 +45,6 @@
                     const date = doc.querySelector('.date').textContent;
                     const keywords = doc.querySelector('.keywords').textContent;
                     const content = doc.querySelector('p:not(.date):not(.keywords)').textContent.substring(0, 100) + '...';
-
                     const blogDiv = document.createElement('div');
                     blogDiv.classList.add('blog-preview');
                     blogDiv.innerHTML = `
@@ -91,7 +53,7 @@
                         <p class="keywords">${keywords}</p>
                         <p>${content}</p>
                     `;
-                    blogDiv.onclick = () => loadBlog(blogFile);
+                    blogDiv.onclick = () => loadBlogContent(blogFile);
                     blogsContainer.appendChild(blogDiv);
                 } catch (error) {
                     console.error('Error loading blog:', blogFile, error);
@@ -99,10 +61,38 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            loadBlogs();
-            loadInitialBlog();
-        });
+        async function loadAboutMe() {
+            const aboutMeContent = `
+                <div class="about-me">
+                    <img src="path/to/your-photo.jpg" alt="About Me Photo">
+                    <h2>About Me</h2>
+                    <p>This is the about me section. Include a brief introduction about yourself here.</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
+                            <img src="path/to/linkedin-icon.png" alt="LinkedIn">
+                        </a>
+                        <a href="https://open.spotify.com/user/yourprofile" target="_blank">
+                            <img src="path/to/spotify-icon.png" alt="Spotify">
+                        </a>
+                    </div>
+                </div>
+            `;
+            document.getElementById('blog-content').innerHTML = aboutMeContent;
+            MathJax.typeset(); // Process LaTeX in the content
+        }
+
+        async function loadBlogContent(blogFile) {
+            try {
+                const response = await fetch(blogFile);
+                const text = await response.text();
+                document.getElementById('blog-content').innerHTML = text;
+                MathJax.typeset(); // Process LaTeX in the content
+            } catch (error) {
+                console.error('Error loading blog content:', blogFile, error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadBlogs);
     </script>
 </body>
 </html>

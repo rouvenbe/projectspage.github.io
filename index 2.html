@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <!-- Header content removed as per your changes -->
+    </header>
+    <main>
+        <section class="blog-list-container">
+            <div class="blogs" id="blogs">
+                <div class="blog-preview" onclick="loadAboutMe()">
+                    <h2>About Me</h2>
+                    <p>A brief introduction about yourselfee...</p>
+                </div>
+            </div>
+        </section>
+        <section class="blog-content-container">
+            <div id="blog-content" class="blog-content"></div>
+        </section>
+    </main>
+    <footer>
+        <!-- Footer background color changed to white -->
+        <p>&copy; 2024 My Portfolio</p>
+    </footer>
+    <script>
+        async function loadBlogs() {
+            const blogsContainer = document.getElementById('blogs');
+            const blogFiles = ['blogs/blog1.html', 'blogs/blog2.html', 'blogs/blog3.html'];
+
+            for (const blogFile of blogFiles) {
+                try {
+                    const response = await fetch(blogFile);
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+
+                    const title = doc.querySelector('h2').textContent;
+                    const date = doc.querySelector('.date').textContent;
+                    const keywords = doc.querySelector('.keywords').textContent;
+                    const content = doc.querySelector('p:not(.date):not(.keywords)').textContent.substring(0, 100) + '...';
+                    const blogDiv = document.createElement('div');
+                    blogDiv.classList.add('blog-preview');
+                    blogDiv.innerHTML = `
+                        <h2>${title}</h2>
+                        <p class="date">${date}</p>
+                        <p class="keywords">${keywords}</p>
+                        <p>${content}</p>
+                    `;
+                    blogDiv.onclick = () => loadBlogContent(blogFile);
+                    blogsContainer.appendChild(blogDiv);
+                } catch (error) {
+                    console.error('Error loading blog:', blogFile, error);
+                }
+            }
+        }
+
+        async function loadAboutMe() {
+            const aboutMeContent = `
+                <div class="about-me">
+                    <img src="path/to/your-photo.jpg" alt="About Me Photo">
+                    <h2>About Me</h2>
+                    <p>This is the about me section. Include a brief introduction about yourself here.</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
+                            <img src="path/to/linkedin-icon.png" alt="LinkedIn">
+                        </a>
+                        <a href="https://open.spotify.com/user/yourprofile" target="_blank">
+                            <img src="path/to/spotify-icon.png" alt="Spotify">
+                        </a>
+                    </div>
+                </div>
+            `;
+            document.getElementById('blog-content').innerHTML = aboutMeContent;
+        }
+
+        async function loadBlogContent(blogFile) {
+            try {
+                const response = await fetch(blogFile);
+                const text = await response.text();
+                document.getElementById('blog-content').innerHTML = text;
+            } catch (error) {
+                console.error('Error loading blog content:', blogFile, error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadBlogs);
+    </script>
+</body>
+</html>

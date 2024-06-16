@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header, footer {
+    background-color: white; /* Changed to white */
+    text-align: center;
+    padding: 1em 0;
+}
+
+main {
+    display: flex;
+    flex: 1;
+}
+
+.blog-list-container {
+    width: 30%;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+}
+
+.blogs {
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-preview {
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    background: #f4f4f4;
+    transition: background 0.3s;
+}
+
+.blog-preview:hover {
+    background: #e0e0e0;
+}
+
+.blog-preview h2 {
+    margin: 0;
+}
+
+.blog-preview .date,
+.blog-preview .keywords {
+    font-size: 0.9em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.blog-preview p {
+    margin: 10px 0 0 0;
+}
+
+.blog-content-container {
+    width: 70%;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.about-me img {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.social-icons a img {
+    width: 30px; /* Adjust size as needed */
+    height: auto;
+}
