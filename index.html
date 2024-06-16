@@ -11,13 +11,40 @@
         <h1>Welcome to My Portfolio</h1>
     </header>
     <main>
-        <section>
-            <h2>About Me</h2>
-            <p>This is an example text about me and my work.</p>
+        <section class="blog-container">
+            <button class="arrow left-arrow" onclick="scrollLeft()">&#8592;</button>
+            <div class="blogs" id="blogs">
+                <div class="blog">
+                    <h2>Blog 1</h2>
+                    <p>This is the first blog entry.</p>
+                </div>
+                <div class="blog">
+                    <h2>Blog 2</h2>
+                    <p>This is the second blog entry.</p>
+                </div>
+                <div class="blog">
+                    <h2>Blog 3</h2>
+                    <p>This is the third blog entry.</p>
+                </div>
+                <div class="blog">
+                    <h2>Blog 4</h2>
+                    <p>This is the fourth blog entry.</p>
+                </div>
+            </div>
+            <button class="arrow right-arrow" onclick="scrollRight()">&#8594;</button>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 My Portfolio</p>
     </footer>
+    <script>
+        function scrollRight() {
+            document.getElementById('blogs').scrollBy(300, 0);
+        }
+
+        function scrollLeft() {
+            document.getElementById('blogs').scrollBy(-300, 0);
+        }
+    </script>
 </body>
 </html>
