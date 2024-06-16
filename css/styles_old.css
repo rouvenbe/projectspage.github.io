@@ -1,83 +1,145 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif; /* Default font for the body */
     margin: 0;
     padding: 0;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    color: #1c1c1c; /* 90% black for body text */
 }
 
-header {
-    background-color: #333;
-    color: white;
+header, footer {
+    background-color: white;
     text-align: center;
     padding: 1em 0;
+    color: #1c1c1c; /* 90% black for header and footer */
 }
 
 main {
-    padding: 2em;
-}
-
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 1em 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-.blog-container {
     display: flex;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
+    flex: 1;
+}
+
+.blog-list-container {
+    width: 30%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
 }
 
 .blogs {
     display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
+    flex-direction: column;
 }
 
-.blog {
-    min-width: 400px;
-    max-width: 400px;
-    margin: 0 10px;
+.blog-preview {
     padding: 20px;
-    background: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.blog img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px 8px 0 0;
-}
-
-.blog h2 {
-    margin: 10px 0;
-}
-
-.blog p {
-    margin: 10px 0;
-}
-
-.arrow {
-    background: none;
-    border: none;
-    font-size: 2em;
+    border-bottom: 1px solid #ccc;
     cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
+    background: #f4f4f4;
+    transition: background 0.3s;
+    color: #1c1c1c; /* 90% black for blog previews */
 }
 
-.left-arrow {
-    left: 0;
+.blog-preview:hover {
+    background: #e0e0e0;
 }
 
-.right-arrow {
-    right: 0;
+.blog-preview h2 {
+    margin: 0;
+    font-size: 1.5em; /* Increase font size */
+    color: #1c1c1c; /* 90% black for titles in blog previews */
+}
+
+.blog-preview .date,
+.blog-preview .keywords {
+    font-size: 1em; /* Increase font size */
+    color: #666; /* Grey color for date and keywords */
+    margin: 5px 0;
+}
+
+.blog-preview p {
+    margin: 10px 0 0 0;
+    font-family: 'Times New Roman', Times, serif; /* Change font to Times New Roman */
+    font-size: 1.2em; /* Increase font size */
+    color: #1c1c1c; /* 90% black for text in blog previews */
+}
+
+.blog-content-container {
+    margin-left: 30%;
+    width: 70%;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 1em; /* Adjust this based on header height */
+}
+
+.blog-content {
+    max-width: 650px; /* Set a maximum width */
+    width: 100%; /* Ensure the content is responsive */
+    margin: 0 20px; /* Left and right space */
+    text-align: justify;
+    color: #1c1c1c; /* 90% black for blog content */
+}
+
+.blog-content h1 {
+    font-size: 2.25em; /* Increase font size */
+    color: #1c1c1c; /* 90% black for h1 */
+    text-align: left; /* Align h1 to the left */
+}
+
+.blog-content h2 {
+    font-size: 2em; /* Increase font size */
+    color: #1c1c1c; /* 90% black for h2 */
+    text-align: left; /* Align h2 to the left */
+}
+.blog-content h3 {
+    font-size: 1.5em; /* Increase font size */
+    color: #1c1c1c; /* 90% black for h2 */
+    text-align: left; /* Align h2 to the left */
+}
+
+.blog-content p {
+    font-family: 'Times New Roman', Times, serif; /* Change font to Times New Roman */
+    font-size: 1.25em; /* Increase font size */
+    color: #1c1c1c; /* 90% black for text in blog content */
+}
+
+.blog-content ul, 
+.blog-content ol {
+    margin-left: 20px; /* Add left margin to lists */
+    font-family: 'Times New Roman', Times, serif; /* Ensure list items use Times New Roman */
+    font-size: 1.25em; /* Ensure list items have the same font size as other text */
+    color: #1c1c1c; /* 90% black for list items */
+}
+
+.blog-content img, 
+.blog-content .math {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.about-me img {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.social-icons a img {
+    width: 30px; /* Adjust size as needed */
+    height: auto;
 }

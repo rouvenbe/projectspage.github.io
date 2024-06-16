@@ -5,103 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <header>
-        <h1>Welcome to My Portfolio</h1>
+        <h1>My Blog</h1>
+        <!-- Unique Identifier: v1.0 -->
     </header>
     <main>
         <section class="blog-list-container" id="blog-list-container">
-            <div class="blogs" id="blogs">
-                <div class="blog-preview" onclick="loadBlog('about-me')">
-                    <h2>About Me</h2>
-                    <p>A brief introduction about yourself...</p>
-                </div>
-                <!-- Blog previews will be loaded dynamically here -->
-            </div>
-        </section>
-        <section class="blog-content-container">
-            <div id="blog-content" class="blog-content"></div>
+            <ul id="blog-list" class="blog-list">
+                <!-- Blog links will be dynamically inserted here -->
+            </ul>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 My Portfolio</p>
     </footer>
     <script>
-        async function loadBlog(blogId) {
-            const blogContent = document.getElementById('blog-content');
-            let blogFile;
-            if (blogId === 'about-me') {
-                blogFile = 'about-me.html';
-            } else {
-                blogFile = `blogs/${blogId}.html`;
-            }
+        const blogs = [
+            { id: 'blog1', title: 'Blog 1' },
+            { id: 'blog2', title: 'Blog 2' },
+            { id: 'blog3', title: 'Blog 3' },
+            { id: 'blog4', title: 'Blog 4' },
+            { id: 'blog5', title: 'Blog 5' },
+            { id: 'blog6', title: 'Blog 6' },
+        ];
 
-            history.pushState({ blogId }, '', `/${blogId}`);
+        const blogList = document.getElementById('blog-list');
 
-            try {
-                const response = await fetch(blogFile);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                const text = await response.text();
-                blogContent.innerHTML = text;
-                MathJax.typeset(); // Process LaTeX in the content if needed
-            } catch (error) {
-                console.error('Error loading blog:', blogFile, error);
-                blogContent.innerHTML = '<p>Sorry, the content you are looking for cannot be found.</p>';
-            }
-        }
-
-        function loadInitialBlog() {
-            const path = window.location.pathname.substring(1); // Get the path without leading '/'
-            const blogId = path || 'about-me'; // Default to 'about-me' if path is empty
-            loadBlog(blogId);
-        }
-
-        window.addEventListener('popstate', event => {
-            if (event.state && event.state.blogId) {
-                loadBlog(event.state.blogId);
-            }
-        });
-
-        async function loadBlogs() {
-            const blogsContainer = document.getElementById('blogs');
-            const blogFiles = ['blog1', 'blog2', 'blog3', 'blog4', 'blog5', 'blog6'];
-
-            for (const blogFile of blogFiles) {
-                try {
-                    const response = await fetch(`blogs/${blogFile}.html`);
-                    const text = await response.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(text, 'text/html');
-
-                    const title = doc.querySelector('h2').textContent;
-                    const date = doc.querySelector('.date').textContent;
-                    const keywords = doc.querySelector('.keywords').textContent;
-                    const content = doc.querySelector('p:not(.date):not(.keywords)').textContent.substring(0, 100) + '...';
-
-                    const blogDiv = document.createElement('div');
-                    blogDiv.classList.add('blog-preview');
-                    blogDiv.innerHTML = `
-                        <h2>${title}</h2>
-                        <p class="date">${date}</p>
-                        <p class="keywords">${keywords}</p>
-                        <p>${content}</p>
-                    `;
-                    blogDiv.onclick = () => loadBlog(blogFile);
-                    blogsContainer.appendChild(blogDiv);
-                } catch (error) {
-                    console.error('Error loading blog:', blogFile, error);
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadBlogs();
-            loadInitialBlog();
+        blogs.forEach(blog => {
+            const listItem = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = `blogs/${blog.id}.html`;
+            link.textContent = blog.title;
+            listItem.appendChild(link);
+            blogList.appendChild(listItem);
         });
     </script>
 </body>
