@@ -13,24 +13,7 @@
     <main>
         <section class="blog-container">
             <button class="arrow left-arrow" onclick="scrollLeft()">&#8592;</button>
-            <div class="blogs" id="blogs">
-                <div class="blog">
-                    <h2>Blog 1</h2>
-                    <p>This is the first blog entry.</p>
-                </div>
-                <div class="blog">
-                    <h2>Blog 2</h2>
-                    <p>This is the second blog entry.</p>
-                </div>
-                <div class="blog">
-                    <h2>Blog 3</h2>
-                    <p>This is the third blog entry.</p>
-                </div>
-                <div class="blog">
-                    <h2>Blog 4</h2>
-                    <p>This is the fourth blog entry.</p>
-                </div>
-            </div>
+            <div class="blogs" id="blogs"></div>
             <button class="arrow right-arrow" onclick="scrollRight()">&#8594;</button>
         </section>
     </main>
@@ -38,6 +21,32 @@
         <p>&copy; 2024 My Portfolio</p>
     </footer>
     <script>
+        // Function to dynamically load blog entries
+        async function loadBlogs() {
+            const blogsContainer = document.getElementById('blogs');
+            const blogFiles = ['blogs/blog1.html', 'blogs/blog2.html', 'blogs/blog3.html'];
+
+            for (const blogFile of blogFiles) {
+                try {
+                    const response = await fetch(blogFile);
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
+
+                    const title = doc.querySelector('h2').textContent;
+                    const content = doc.querySelector('p').textContent.substring(0, 100) + '...'; // First 100 chars
+
+                    const blogDiv = document.createElement('div');
+                    blogDiv.classList.add('blog');
+                    blogDiv.innerHTML = `<h2>${title}</h2><p>${content}</p>`;
+
+                    blogsContainer.appendChild(blogDiv);
+                } catch (error) {
+                    console.error('Error loading blog:', blogFile, error);
+                }
+            }
+        }
+
         function scrollRight() {
             document.getElementById('blogs').scrollBy(300, 0);
         }
@@ -45,6 +54,8 @@
         function scrollLeft() {
             document.getElementById('blogs').scrollBy(-300, 0);
         }
+
+        document.addEventListener('DOMContentLoaded', loadBlogs);
     </script>
 </body>
 </html>
