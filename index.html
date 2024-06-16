@@ -35,10 +35,15 @@
 
                     const title = doc.querySelector('h2').textContent;
                     const content = doc.querySelector('p').textContent.substring(0, 100) + '...'; // First 100 chars
+                    const imageSrc = doc.querySelector('img') ? doc.querySelector('img').src : '';
 
                     const blogDiv = document.createElement('div');
                     blogDiv.classList.add('blog');
-                    blogDiv.innerHTML = `<h2>${title}</h2><p>${content}</p>`;
+                    blogDiv.innerHTML = `
+                        <img src="${imageSrc}" alt="${title}">
+                        <h2>${title}</h2>
+                        <p>${content}</p>
+                    `;
 
                     blogsContainer.appendChild(blogDiv);
                 } catch (error) {
@@ -48,11 +53,11 @@
         }
 
         function scrollRight() {
-            document.getElementById('blogs').scrollBy(300, 0);
+            document.getElementById('blogs').scrollBy(400, 0);
         }
 
         function scrollLeft() {
-            document.getElementById('blogs').scrollBy(-300, 0);
+            document.getElementById('blogs').scrollBy(-400, 0);
         }
 
         document.addEventListener('DOMContentLoaded', loadBlogs);
