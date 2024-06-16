@@ -56,9 +56,9 @@
         }
 
         function loadInitialBlog() {
-            const params = new URLSearchParams(window.location.search);
-            const blogId = params.toString(); // Get the query string as the blogId
-            loadBlog(blogId || 'about-me');
+            const path = window.location.pathname.substring(1); // Get the path without leading '/'
+            const blogId = path || 'about-me'; // Default to 'about-me' if path is empty
+            loadBlog(blogId);
         }
 
         window.addEventListener('popstate', event => {
