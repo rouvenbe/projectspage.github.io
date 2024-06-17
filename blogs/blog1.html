@@ -12,13 +12,21 @@
             margin: 2000px auto;
         }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
+    <header class="hidden-header">
+        <h1>Predicting Top 10 Chart Hits with Logistic Regression, Support Vecor Machine and Gradient Boosting Trees</h1>
+    </header>
     <main>
     <div class="blog-content">
         <h1>Predicting Top 10 Chart Hits with Logistic Regression, Support Vecor Machine and Gradient Boosting Trees</h1>
-        <p class="date">2022-12-02</p>
-        <p class="keywords">#example #blog #tutorial</p>
+        <div class="date-keywords">
+            <span class="date">2022-12-02</span>
+            <span class="keywords">#example #blog #tutorial</span>
+        </div>
+        <hr>
         <p>The analysis of the german charts and 347 variables shows that some of the variables have a significant influence on the chart success. Given the set of regressors, which is listed below, with logistic regression, Linear SVM and Gradient Boosting models, I calculate a songs probability of reaching a top 10 Chart Position. The best model is the Logit Model which can predict Hit-Songs with a balanced accuracy of 73%, which is clearly above that of random assignment (50%).
         </p>
         <h2>Data</h2>
@@ -35,6 +43,11 @@
         <h2>Models</h2>
         <h3>Logistic regression</h3>
         <p>Logistic regression can be seen as a type of OLS regression, where the predicted values are transformed using the logistic function to constrain them between 0 and 1. This transformation allows logistic regression to be used for classification problems, where the predicted values represent the probability of an event occurring. To estimate the coefficients, you can use maximum likelihood estimation, which involves finding the values of the coefficients that maximize the likelihood of the observed data.</p>
+        </p>
+        <div>
+            $$\Pr(Y_i = 1) = F(Z_i) = \frac{1}{1 + \exp(-Z_i)}$$
+        </div>
+        <p>where \(Pr(y = 1)\) represents the probability that a song is a dance hit. \(Z\)  is a function of estimated parameters and the Input Vector. This probability follows a logistic curve, and the threshold of 0.5 will determine if a song is classified as a hit or a nonhit.
         </p>
         <h3>Linear support vector machine</h3>
         <p>Linear support vector machines (SVMs) are estimated using the primal optimization problem, which involves finding the hyperplane in the feature space that maximally separates the two classes.</p>

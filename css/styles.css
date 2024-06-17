@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif; /* Updated to use Helvetica */
     margin: 0;
     padding: 0;
     background-color: white;
@@ -72,7 +72,7 @@ main {
 }
 
 .blog-list h2 {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif; /* Updated to use Helvetica */
     font-weight: bold;
     font-size: 1.2em;
     margin-bottom: 0.5em;
@@ -107,7 +107,7 @@ main {
 }
 
 .about-me h2 {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif; /* Updated to use Helvetica */
     font-weight: bold;
     color: #1e1e1e;
 }
@@ -126,16 +126,34 @@ main {
 }
 
 .blog-content h1, .blog-content h2, .blog-content h3 {
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif; /* Updated to use Helvetica */
     font-weight: bold;
     color: #1e1e1e;
-    text-align: left;
+    text-align: center; /* Centering the titles */
 }
 
 .blog-content p {
     font-family: 'Times New Roman', Times, serif;
     font-size: 1.25em;
     color: #1e1e1e;
+    text-align: justify;
+}
+
+.blog-content .date, .blog-content .keywords {
+    text-align: center; /* Centering the date and keywords */
+}
+
+.blog-content .date-keywords {
+    display: flex;
+    justify-content: center; /* Centering the date and keywords container */
+    margin-bottom: 1em;
+}
+
+.blog-content hr {
+    border: 0;
+    height: 1px;
+    background: #ccc;
+    margin: 2em 0; /* Space around the horizontal line */
 }
 
 .blog-content ul, .blog-content ol {
