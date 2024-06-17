@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog 1</title>
+    <title>Predicting Top 10 Chart Hits with Logistic Regression, Support Vecor Machine and Gradient Boosting Trees</title>
+    <link rel="stylesheet" href="../css/styles.css">
     <style>
         .rotated-svg {
             transform: rotate(90deg);
@@ -13,7 +14,8 @@
     </style>
 </head>
 <body>
-    <div class="blog">
+    <main>
+    <div class="blog-content">
         <h1>Predicting Top 10 Chart Hits with Logistic Regression, Support Vecor Machine and Gradient Boosting Trees</h1>
         <p class="date">2022-12-02</p>
         <p class="keywords">#example #blog #tutorial</p>
@@ -39,13 +41,14 @@
         <h3>Gradient boosting tree</h3>
         <p>A GBRT works by training a sequence of decision tree models in a stage-wise fashion. In each stage, a new decision tree is trained to correct the errors made by the previous tree. The trees are trained using the gradient descent algorithm, which minimizes a loss function by iteratively updating the parameters of the model in the direction that reduces the error. The prediction of the final model is the weighted sum of the predictions of the individual trees.</p>
         <h2>Experimental setup</h2>
-        <img class="rotated-svg" src="images/blog11.svg" alt="Description of SVG">
+        <img class="rotated-svg" src="../images/blog11.svg" alt="Description of SVG">
         <p>Since the relevant features vary significantly from genre to genre, an Separate model for HipHop Tracks is appropriate. After the genre filter, the data are randomly split into training (80%) and test (20%) data sets. Each of the three models (Logit, SVM, GB) receives the same training and test set.
             FS must be performed as a next step. I decided to use Lasso (L1) regularisation. This way, coefficients can be regularised down to zero, which reduces the set of variables to a few relevant ones. To choose the right regularisation parameter (“C”), I performed parameter tuning with cross validation on the test set. The best parameters were subsequently used for training the model.
             The whole procedure was repeated 50 times in order to minimise the variance due to random training and test data splitting. Since the data sets are unbalanced, balanced accuracy was used as a selection criterion.
             This research proves that popularity of songs can be predicted from the analysis of music signals, artist related socioeconomic variables ans Lyrics-analysis.
         </p>
-        <img src="images/blog12.png">
+        <img src="../images/blog12.png">
     </div>
+    </main>
 </body>
 </html>

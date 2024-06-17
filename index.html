@@ -7,15 +7,21 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>My Blog</h1>
-        <!-- Unique Identifier: v1.0 -->
+    <header class="hidden-header">
+        <h1>Projects</h1>
     </header>
     <main>
-        <section class="blog-list-container" id="blog-list-container">
-            <ul id="blog-list" class="blog-list">
-                <!-- Blog links will be dynamically inserted here -->
-            </ul>
+        <section class="content-container">
+            <div class="blog-list-container" id="blog-list-container">
+                <ul id="blog-list" class="blog-list">
+                    <!-- Blog previews will be dynamically inserted here -->
+                </ul>
+            </div>
+            <aside class="about-me" id="about-me">
+                <img src="images/your-photo.jpg" alt="Your Photo" class="about-me-photo">
+                <h2>Your Name</h2>
+                <p>This is a brief introduction about yourself. You can include information about your background, interests, and other relevant details that you'd like visitors to know about you.</p>
+            </aside>
         </section>
     </main>
     <footer>
@@ -23,23 +29,44 @@
     </footer>
     <script>
         const blogs = [
-            { id: 'blog1', title: 'Blog 1' },
-            { id: 'blog2', title: 'Blog 2' },
-            { id: 'blog3', title: 'Blog 3' },
-            { id: 'blog4', title: 'Blog 4' },
-            { id: 'blog5', title: 'Blog 5' },
-            { id: 'blog6', title: 'Blog 6' },
+            { id: 'blog1', file: 'blogs/blog1.html' },
+            { id: 'blog2', file: 'blogs/blog2.html' },
+            { id: 'blog3', file: 'blogs/blog3.html' },
+            { id: 'blog4', file: 'blogs/blog4.html' },
+            { id: 'blog5', file: 'blogs/blog5.html' },
+            { id: 'blog6', file: 'blogs/blog6.html' },
         ];
 
         const blogList = document.getElementById('blog-list');
 
-        blogs.forEach(blog => {
-            const listItem = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = `blogs/${blog.id}.html`;
-            link.textContent = blog.title;
-            listItem.appendChild(link);
-            blogList.appendChild(listItem);
+        blogs.forEach(async (blog) => {
+            try {
+                const response = await fetch(blog.file);
+                const text = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+
+                const title = doc.querySelector('h1').textContent;
+                const date = doc.querySelector('.date').textContent;
+                const keywords = doc.querySelector('.keywords').textContent;
+                const content = doc.querySelector('p:not(.date):not(.keywords)').textContent.substring(0, 100) + '...';
+
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = blog.file;
+                link.innerHTML = `
+                    <h2>${title}</h2>
+                    <p>${content}</p>
+                    <div class="date-keywords">
+                        <span class="date">${date}</span>
+                        <span class="keywords">${keywords}</span>
+                    </div>
+                `;
+                listItem.appendChild(link);
+                blogList.appendChild(listItem);
+            } catch (error) {
+                console.error('Error loading blog:', blog.file, error);
+            }
         });
     </script>
 </body>
