@@ -9,9 +9,7 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>    
 </head>
 <body>
-    <header class="hidden-header">
-        <h1>Projects</h1>
-    </header>
+    <header class="hidden-header"></header>
     <main>
         <section class="content-container">
             <div class="blog-list-container" id="blog-list-container">
@@ -20,9 +18,22 @@
                 </ul>
             </div>
             <aside class="about-me" id="about-me">
-                <img src="images/your-photo.jpg" alt="Your Photo" class="about-me-photo">
-                <h2>Your Name</h2>
-                <p>This is a brief introduction about yourself. You can include information about your background, interests, and other relevant details that you'd like visitors to know about you.</p>
+                <img src="images/photo2.jpeg" alt="Your Photo" class="about-me-photo">
+                <p>Applying econometrics & statistics on chart data and analysing music from a data perspective | Musician (producing electronic music)
+                </p>
+                <div class="contact-info">
+                    <h2>Contact Me</h2>
+                    <a href="https://open.spotify.com/user/yourprofile" target="_blank">
+                        <img src="images/spotify-logo.png" alt="Spotify" class="contact-logo">
+                    </a>
+                    <a href="https://www.linkedin.com/in/yourprofile" target="_blank">
+                        <img src="images/linkedin-logo.jpg" alt="LinkedIn" class="contact-logo">
+                    </a>
+                    <p>rouven.beiner@gmail.com</p>
+                    <p>Rouven Beiner</p>
+                    <p>Lampestr. 9</p>
+                    <p>04107 Leipzig</p>
+                </div>
             </aside>
         </section>
     </main>
@@ -31,45 +42,60 @@
     </footer>
     <script>
         const blogs = [
-            { id: 'blog1', file: 'blogs/blog1.html' },
-            { id: 'blog2', file: 'blogs/blog2.html' },
-            { id: 'blog3', file: 'blogs/blog3.html' },
-            { id: 'blog4', file: 'blogs/blog4.html' },
-            { id: 'blog5', file: 'blogs/blog5.html' },
-            { id: 'blog6', file: 'blogs/blog6.html' },
+            { id: 'blog2', file: 'blogs/frontier production function estimation using panel data of music chart artists.html' },
+            { id: 'blog3', file: 'blogs/the economics of differentiation in music industry revisited.html' },
+            { id: 'blog4', file: 'blogs/us recession forecasting with extreme gradientboosting.html' },
+            { id: 'blog5', file: 'blogs/how to produce a hit song.html' }
         ];
 
-        const blogList = document.getElementById('blog-list');
+        async function loadBlogs() {
+            const blogList = document.getElementById('blog-list');
+            const blogsData = await Promise.all(blogs.map(async (blog) => {
+                try {
+                    const response = await fetch(blog.file);
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
 
-        blogs.forEach(async (blog) => {
-            try {
-                const response = await fetch(blog.file);
-                const text = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text, 'text/html');
+                    const title = doc.querySelector('h1').textContent;
+                    const date = doc.querySelector('.date').textContent;
+                    const keywords = doc.querySelector('.keywords').textContent;
+                    const content = doc.querySelector('p:not(.date):not(.keywords)').textContent.substring(0, 100) + '...';
 
-                const title = doc.querySelector('h1').textContent;
-                const date = doc.querySelector('.date').textContent;
-                const keywords = doc.querySelector('.keywords').textContent;
-                const content = doc.querySelector('p:not(.date):not(.keywords)').textContent.substring(0, 100) + '...';
+                    return {
+                        ...blog,
+                        title,
+                        date: new Date(date),
+                        keywords,
+                        content,
+                    };
+                } catch (error) {
+                    console.error('Error loading blog:', blog.file, error);
+                    return null;
+                }
+            }));
 
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = blog.file;
-                link.innerHTML = `
-                    <h2>${title}</h2>
-                    <p>${content}</p>
-                    <div class="date-keywords">
-                        <span class="date">${date}</span>
-                        <span class="keywords">${keywords}</span>
-                    </div>
-                `;
-                listItem.appendChild(link);
-                blogList.appendChild(listItem);
-            } catch (error) {
-                console.error('Error loading blog:', blog.file, error);
-            }
-        });
+            blogsData
+                .filter(blog => blog !== null)
+                .sort((a, b) => b.date - a.date)
+                .forEach(blog => {
+                    const listItem = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = blog.file;
+                    link.innerHTML = `
+                        <div class="date-keywords">
+                            <span class="date">${blog.date.toLocaleDateString()}</span>
+                            <span class="keywords">${blog.keywords}</span>
+                        </div>
+                        <h2>${blog.title}</h2>
+                        <p>${blog.content}</p>
+                    `;
+                    listItem.appendChild(link);
+                    blogList.appendChild(listItem);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadBlogs);
     </script>
 </body>
 </html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .rotated-svg {
+            transform: rotate(90deg);
+            display: block;
+            margin: 2000px auto;
+        }
+
+        .pdf-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            height: 700px;
+            border: 2px solid #202020;
+        }
+
+        .pdf-container a {
+            display: inline-block;
+            margin-top: 10px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            font-size: 1em;
+            color: #1e1e1e;
+            text-decoration: none;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .pdf-container a:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header class="hidden-header">
+        <a href="../index.html" class="start-link">start</a> <!-- Added start link -->
+    </header>
+    <main>
+    <div class="blog-content">
+        <h1>A frontier production function estimation using panel data from music chart artists</h1>
+        <div class="date-keywords">
+            <span class="date">2023-04-13</span>
+            <p class="keywords"></p>
+        </div>
+        <hr>
+        <p>This study analyzes the production function of German chart artists using a large dataset of daily Spotify streaming data and song characteristics from 2015 to 2023.
+            The research aims to quantify the effects of various musical and socioeconomic factors on streaming growth, while also estimating the technical efficiencies of artists and labels.
+            The analysis employs a panel autoregressive distributed lag (ARDL) model to capture the short- and long-term impacts of these factors. Integrating this model into a frontier production function framework, the study estimates the efficiencies of artists and labels, revealing significant heterogeneities.
+            The examination of various song characteristics and socioeconomic variables has
+            yielded interesting new insights or confirmed the results
+            of previous studies. Releases can have a positive effect on Spotify streams if they
+            are shorter in duration, more acoustic, without a featured artist and with a high
+            presence of vocals and explicit lyrics. The success of an artist depends positively
+            on the release frequency from above 51 (64) releases per year and more small
+            releases (Single/EP) are better than a few larger ones (LP/Album).
+        </p>
+        <table class="info-table">
+            <tr>
+                <td>Course</td>
+                <td>Bachelor Thesis</td>
+            </tr>
+            <tr>
+                <td>Supervising professor</td>
+                <td>Prof. Dr. Bernd Süssmuth</td>
+            </tr>
+            <tr>
+                <td>Grade</td>
+                <td>1.3</td>
+            </tr>
+        </table>
+        <div class="pdf-container">
+            <iframe src="../pdfs/frontier_production_function_analysis.pdf" title="PDF Preview"></iframe>
+        </div>
+    </div>
+    </main>
+</body>
+</html>
