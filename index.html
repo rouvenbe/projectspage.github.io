@@ -60,7 +60,7 @@
                     const title = doc.querySelector('h1').textContent;
                     const date = doc.querySelector('.date').textContent;
                     const keywords = doc.querySelector('.keywords').textContent;
-                    const content = doc.querySelector('p:not(.date):not(.keywords)').textContent.substring(0, 150) + '...';
+                    const content = doc.querySelector('p:not(.date):not(.keywords)').textContent.substring(0, 200) + '...';
 
                     return {
                         ...blog,
