@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .rotated-svg {
+            transform: rotate(90deg);
+            display: block;
+            margin: 2000px auto;
+        }
+
+        .pdf-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            height: 700px;
+            border: 2px solid #202020;
+        }
+
+        .pdf-container a {
+            display: inline-block;
+            margin-top: 10px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            font-size: 1em;
+            color: #1e1e1e;
+            text-decoration: none;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .pdf-container a:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header class="hidden-header">
+        <a href="../index.html" class="start-link">start</a> <!-- Added start link -->
+    </header>
+    <main>
+    <div class="blog-content">
+        <h1>Introducing a Conditional GAN-Based Approach for Seasonality adjustment</h1>
+        <div class="date-keywords">
+            <span class="date">2024-11-29</span>
+            <p class="keywords"></p>
+        </div>
+        <hr>
+        <p> This paper evaluates the performance of seasonality adjustment methods using Monte Carlo simulations of synthetic time series with RBC-Slutzky-type business cycles and a stochastic trend.
+            I introduce a new conditional Generative Adversarial Network (cGAN)-based method, cGAN-LOESS, for seasonal extraction.
+            Unlike traditional smoothing or filtering methods, cGAN-LOESS learns the general underlying distribution of a data-generating process,
+            which must be specified by the analyst. Once trained, the model requires only three parameters to adjust.
+            The analysis compares cGAN-LOESS with X-13-ARIMA-SEATS and STL by calculating mean squared error (MSE) against known seasonal components in 2,000 simulated series.
+            Results show that cGAN-LOESS outperforms traditional methods, particularly when combined with ensemble approaches.
+        </p>
+        <table class="info-table">
+            <tr>
+                <td>Course</td>
+                <td>Time series analysis for macroeconomics and finance (M.Sc.)</td>
+            </tr>
+            <tr>
+                <td>Supervising professor</td>
+                <td>Prod. Dr. Bernd Süssmuth</td>
+            </tr>
+            <tr>
+                <td>Grade</td>
+                <td>TBA</td>
+            </tr>
+        </table>
+        <div class="pdf-container">
+            <iframe src="../pdfs/Introducing a Conditional GAN-Based Approach for Seasonality adjustment.pdf" title="PDF Preview"></iframe>
+        </div>
+    </div>
+    </main>
+</body>
+</html>
