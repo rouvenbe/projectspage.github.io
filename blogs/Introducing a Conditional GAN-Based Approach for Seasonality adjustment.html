@@ -51,18 +51,17 @@
     </header>
     <main>
     <div class="blog-content">
-        <h1>Introducing a Conditional GAN-Based Approach for Seasonality adjustment</h1>
+        <h1>Introducing a cGAN-Based Approach for Seasonal Adjustment</h1>
         <div class="date-keywords">
-            <span class="date">2024-12-20</span>
+            <span class="date">2025-03-06</span>
             <p class="keywords"></p>
         </div>
         <hr>
-        <p> This paper evaluates the performance of seasonality adjustment methods using Monte Carlo simulations of synthetic time series with RBC-Slutzky-type business cycles and a stochastic trend.
-            I introduce a new conditional Generative Adversarial Network (cGAN)-based method, cGAN-LOESS, for seasonal extraction.
-            Unlike traditional smoothing or filtering methods, cGAN-LOESS learns the general underlying distribution of a data-generating process,
-            which must be specified by the analyst. Once trained, the model requires only three parameters to adjust.
-            The analysis compares cGAN-LOESS with X-13-ARIMA-SEATS and STL by calculating mean squared error (MSE) against known seasonal components in 2,000 simulated series.
-            Results show that cGAN-LOESS outperforms traditional methods, particularly when combined with ensemble approaches.
+        <p> This paper evaluates the performance of seasonal adjustment methods
+            using Monte Carlo simulated synthetic time series. I introduce a new method
+            for seasonal extraction based on a conditional Generative Adversarial Network
+            (cGAN) and seasonal subseries smoothing using LOESS. Results suggest that cGAN-LOESS can outperform traditional methods, and an
+            ensemble of different base methods can further improve performance.
         </p>
         <table class="info-table">
             <tr>
@@ -75,7 +74,7 @@
             </tr>
         </table>
         <div class="pdf-container">
-            <iframe src="../pdfs/Introducing a Conditional GAN-Based Approach for Seasonality adjustment.pdf" title="PDF Preview"></iframe>
+            <iframe src="../pdfs/Introducing a cGAN-Based Approach for Seasonal Adjustment - Text - Rouven Beiner.pdf" title="PDF Preview"></iframe>
         </div>
     </div>
     </main>
